@@ -95,6 +95,53 @@ FROM таблица
 WHERE условие;
 ```
 
+---
+
+## Урок 6. Операторы IS NULL, BETWEEN, IN
+
+### 1. IS NULL / IS NOT NULL
+Используются для работы с "пустотой" (**NULL**).  
+Нельзя использовать `=` для сравнения с NULL.  
+
+* **`IS NULL`** — выбирает записи, где значение отсутствует.
+
+```sql
+SELECT *
+FROM Teacher
+WHERE middle_name IS NULL;
+```
+
+* **`IS NOT NULL`** — выбирает записи, где поле заполнено.
+
+```sql
+SELECT *
+FROM Teacher
+WHERE middle_name IS NOT NULL;
+```
+
+### 2. BETWEEN
+
+Проверяет вхождение значения в указанный диапазон включая границы.
+
+```sql
+SELECT *
+FROM Payments
+WHERE unit_price BETWEEN 100 AND 500;
+```
+
+### 3. IN
+
+Проверяет, соответствует ли значение хотя бы одному элементу из заданного списка.
+
+```sql
+SELECT *
+FROM FamilyMembers
+WHERE status IN ('father', 'mother');
+```
+
+
+
+
 
 
 
