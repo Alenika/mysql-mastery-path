@@ -246,3 +246,40 @@ GROUP BY class
 ORDER BY count DESC;
 ```
 
+#### Задача 2.  Агрегатные функции MIN и MAX
+
+**Условие:** Для каждого из существующих статусов (поле status) найдите самого старого человека (используйте поле birthday). Выведите статус и дату рождения.
+Для вывода даты рождения используйте псевдоним birthday.
+
+```sql
+SELECT status, MIN(birthday) AS birthday
+FROM FamilyMembers
+GROUP BY status;
+```
+
+#### Задача 3.  Агрегатная функция AVG
+
+**Условие:** Получите среднее время полётов, совершённых на каждой из моделей самолёта. Выведите поле plane и среднее время полётов в секундах.
+Для вывода времени используйте псевдоним time.
+Чтобы получить разницу во времени в секундах между двумя датами используйте:
+Для MySQL: TIMESTAMPDIFF(second, time_out, time_in)
+Для PostgreSQL: EXTRACT(EPOCH FROM (time_in - time_out))
+
+```sql
+SELECT plane, AVG(TIMESTAMPDIFF(second, time_out, time_in)) AS time
+FROM Trip
+GROUP BY plane;
+```
+
+#### Задача 4.  Выборка с использованием нескольких агрегатных функций
+
+**Условие:** Выведите идентификатор комнаты (поле room_id), среднюю стоимость за один день аренды (поле price, для вывода используйте псевдоним avg_price), а также количество резерваций этой комнаты (используйте псевдоним count). Полученный результат отсортируйте в порядке убывания сначала по количеству резерваций, а потом по средней стоимости.
+
+```sql
+SELECT room_id, 
+       AVG(price) AS avg_price, 
+       COUNT(*) AS count
+FROM Reservations
+GROUP BY room_id
+ORDER BY count DESC, avg_price DESC;
+```
