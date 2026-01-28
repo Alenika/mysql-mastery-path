@@ -115,3 +115,35 @@ FROM Rooms
 WHERE has_kitchen = true AND has_internet = true;
 ```
 
+---
+
+### 📋 Упражнения: Операторы IS NULL, BETWEEN, IN
+
+#### Задача 1. Вывод записей, содержащих NULL
+**Условие:** Выведите имена first_name и фамилии last_name студентов из таблицы Student, у кого отсутствует отчество middle_name.
+
+```sql
+SELECT first_name, last_name FROM Student
+WHERE middle_name IS NULL;
+```
+
+#### Задача 2. Поиск значений в указанном промежутке
+**Условие:** Выведите резервации комнат (поля room_id, start_date, end_date) из таблицы Reservations, у которых итоговая стоимость аренды (поле total) находится в промежутке от 500 до 1200 включительно.
+
+```sql
+SELECT room_id, start_date, end_date FROM Reservations
+WHERE total BETWEEN 500 AND 1200;
+```
+
+#### Задача 3. Поиск значений, входящий в определенный список
+**Условие:** Выведите информацию о студентах из таблицы Student, у которых год рождения соответствует одному из перечисленных: 2000, 2002 и 2004.
+
+```sql
+SELECT * FROM Student
+WHERE YEAR(birthday) IN (2000, 2002, 2004);
+```
+
+
+
+
+
