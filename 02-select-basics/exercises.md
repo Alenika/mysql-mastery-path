@@ -207,5 +207,27 @@ WHERE member_name LIKE '%Quincey'
 ORDER BY status ASC, member_name ASC;
 ```
 
+---
+
+### 📋 Упражнения: Группировка, оператор GROUP BY
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/groupping)
+
+#### Задача 1. Количество комнат по типам
+**Условие:** Сгруппируйте данные из таблицы Rooms по полю home_type и выведите тип жилья и количество комнат каждого типа. Используйте псевдоним count_rooms для количества комнат.
+
+```sql
+SELECT home_type, COUNT(*) AS count_rooms 
+FROM Rooms
+GROUP BY home_type;
+```
+
+#### Задача 2.  Средняя цена по типу жилья и ТВ
+**Условие:** Сгруппируйте данные из таблицы Rooms по полям home_type и has_tv. Выведите тип жилья, признак наличия телевизора (поле has_tv) и среднюю цену для каждой группы. Используйте псевдоним avg_price для средней цены.
+
+```sql
+SELECT home_type, has_tv, AVG(price) AS avg_price
+FROM Rooms
+GROUP BY home_type, has_tv;
+```
 
 
