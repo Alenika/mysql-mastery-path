@@ -148,6 +148,20 @@ SELECT * FROM Student
 WHERE YEAR(birthday) IN (2000, 2002, 2004);
 ```
 
+---
+
+### 📋 Упражнения: Оператор LIKE
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/operator-like)
+
+#### Задача 1. Поиск по строковому шаблону
+**Условие:** Найдите всех членов семьи с фамилией "Quincey" и выведите поле member_name.
+
+```sql
+SELECT member_name 
+FROM FamilyMembers
+WHERE member_name LIKE '%Quincey';
+```
+
 
 
 
