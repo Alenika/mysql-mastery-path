@@ -283,3 +283,20 @@ FROM Reservations
 GROUP BY room_id
 ORDER BY count DESC, avg_price DESC;
 ```
+
+---
+
+### 📋 Упражнения: Оператор HAVING
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/operator-having)
+
+#### Задача 1. Фильтрация групп
+**Условие:** Выведите типы комнат (поле home_type) и разницу между самым дорогим и самым дешевым представителем данного типа. В итоговую выборку включите только те типы жилья, количество которых в таблице Rooms больше или равно 2.
+Для вывода разницы стоимости используйте псевдоним difference.
+
+```sql
+SELECT home_type, 
+       MAX(price) - MIN(price) AS difference
+FROM Rooms
+GROUP BY home_type
+HAVING COUNT(*) >= 2;
+```
