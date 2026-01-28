@@ -183,5 +183,29 @@ SELECT name, email FROM Users
 WHERE email REGEXP '@outlook.com|@live.com';
 ```
 
+---
+
+### 📋 Упражнения: Сортировка, оператор ORDER BY
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/sorting)
+
+#### Задача 1. Сортировка по убыванию
+**Условие:** Для каждого отдельного платежа выведите идентификатор товара и сумму, потраченную на него, в отсортированном по убыванию этой суммы виде. Список платежей находится в таблице Payments.
+Для вывода суммы используйте псевдоним sum.
+
+```sql
+SELECT good, (unit_price * amount) AS sum 
+FROM Payments
+ORDER BY sum DESC;
+```
+
+#### Задача 2. Сортировка по нескольким столбцам
+**Условие:** Выведите все данные членов семьи с фамилией Quincey из таблицы FamilyMembers и отсортируйте их по возрастанию сначала по столбцу status, а затем по member_name.
+
+```sql
+SELECT * FROM FamilyMembers
+WHERE member_name LIKE '%Quincey'
+ORDER BY status ASC, member_name ASC;
+```
+
 
 
