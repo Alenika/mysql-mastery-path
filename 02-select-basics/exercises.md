@@ -162,7 +162,26 @@ FROM FamilyMembers
 WHERE member_name LIKE '%Quincey';
 ```
 
+---
 
+### 📋 Упражнения: Оператор REGEXP для регулярных выражений
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/operator-regexp)
+
+#### Задача 1. Поиск по подстроке
+**Условие:** Найдите все жилые помещения (таблица Rooms), в адресе которых содержится строка «Avenue». В результирующей выборке выведите поля id и address.
+
+```sql
+SELECT id, address FROM Rooms
+WHERE address REGEXP 'Avenue';
+```
+
+#### Задача 2. Поиск по электронной почте
+**Условие:** Выведите name, email пользователей, чей адрес электронной почты заканчивается на «@outlook.com» или «@live.com».
+
+```sql
+SELECT name, email FROM Users
+WHERE email REGEXP '@outlook.com|@live.com';
+```
 
 
 
