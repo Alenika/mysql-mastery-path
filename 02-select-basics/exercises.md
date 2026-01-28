@@ -1,4 +1,4 @@
-### 📋 Упражнения: Базовый синтаксис SELECT
+### 📋 Упражнения: Базовый синтаксис SELECT **Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/basic-syntax-sql-query)
 
 #### Задача 1. Вывод строки  
 **Условие:** С помощью оператора SELECT выведите текст "Hello world"  
@@ -29,7 +29,7 @@ FROM Passenger;
 
 --- 
 
-### 📋 Упражнения: Применение функций
+### 📋 Упражнения: Применение функций **Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/using-functions)
 
 #### Задача 1. Вывод строки в нижнем регистре  
 **Условие:** Выведите текст "Hello world" в нижнем регистре с помощью соответствующей функции.  
@@ -56,7 +56,7 @@ FROM FamilyMembers;
 
 ---
 
-### 📋 Упражнения: Исключение дубликатов, DISTINCT
+### 📋 Упражнения: Исключение дубликатов, DISTINCT **Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/distinct-operator)
 
 #### Задача 1. Вывод уникальных имён
 **Условие:** Выведите только уникальные имена first_name студентов из таблицы Student.  
@@ -76,7 +76,7 @@ FROM Schedule;
 
 ---
 
-### 📋 Упражнения: Условный оператор WHERE
+### 📋 Упражнения: Условный оператор WHERE **Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/conditional-where-operator)
 
 #### Задача 1. Простая фильтрация по числам
 **Условие:** Выведите идентификаторы товаров (поле good) из таблицы Payments, стоимость которых больше 2000 единиц. Стоимость товара хранится в поле unit_price.
@@ -117,7 +117,7 @@ WHERE has_kitchen = true AND has_internet = true;
 
 ---
 
-### 📋 Упражнения: Операторы IS NULL, BETWEEN, IN
+### 📋 Упражнения: Операторы IS NULL, BETWEEN, IN **Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/is-null-between-in-operators)
 
 #### Задача 1. Вывод записей, содержащих NULL
 **Условие:** Выведите имена first_name и фамилии last_name студентов из таблицы Student, у кого отсутствует отчество middle_name.
