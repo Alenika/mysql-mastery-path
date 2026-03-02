@@ -34,3 +34,30 @@ FROM Payments AS pay
 INNER JOIN FamilyMembers AS fm
     ON pay.family_member = fm.member_id;
 ```
+## Урок 2. Внутреннее соединение INNER JOIN
+
+```sql
+SELECT поля_таблиц
+FROM таблица_1
+[INNER] JOIN таблица_2
+    ON условие_соединения
+[[INNER] JOIN таблица_n
+    ON условие_соединения]
+```
+
+## Урок 3. Внешнее соединение OUTER JOIN
+
+```sql
+SELECT *
+FROM левая_таблица
+LEFT JOIN правая_таблица
+   ON правая_таблица.ключ = левая_таблица.ключ
+
+UNION ALL
+
+SELECT *
+FROM левая_таблица
+RIGHT JOIN правая_таблица
+ON правая_таблица.ключ = левая_таблица.ключ
+ WHERE левая_таблица.ключ IS NULL
+```
