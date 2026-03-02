@@ -72,3 +72,15 @@ GROUP BY
     Teacher.last_name;
 ```
 
+### Упражнения: Ограничение выборки, оператор LIMIT
+**Источник** [sql-academy.org](https://sql-academy.org/ru/guide/limit)
+
+#### Задача 1. Ограничение записей с начала таблицы
+**Условиe** Отсортируйте список компаний (таблица `Company`) по их названию в алфавитном порядке и выведите первые две записи.
+
+```sql
+SELECT * FROM company
+ORDER BY Name
+LIMIT 2;
+```
+
