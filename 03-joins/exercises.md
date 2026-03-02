@@ -12,3 +12,41 @@ FROM Class
 INNER JOIN Student_in_class
     ON Class.id = Student_in_class.class;
 ```
+
+#### Задача 2.  Многотабличный INNER JOIN
+**Условиe** Дополните запрос из предыдущего задания, добавив ещё одно внутреннее соединение с таблицей `Student`. Объедините по полям `Student_in_class.student` и `Student.id` и вместо идентификатора ученика выведите его имя (поле `first_name`).
+
+```sql
+SELECT Class.name, Student.first_name
+FROM Class
+INNER JOIN Student_in_class
+    ON Class.id = Student_in_class.class
+INNER JOIN Student
+    ON Student_in_class.student = Student.id;
+```
+
+#### Задача 3. Многотабличный INNER JOIN с фильтрацией строк
+**Условиe** Выведите названия продуктов, которые покупал член семьи со статусом "son". Для получения выборки вам нужно объединить таблицу `Payments` с таблицей `FamilyMembers` по полям `family_member` и `member_id`, а также с таблицей `Goods` по полям `good` и `good_id`.
+
+```sql
+SELECT Goods.good_name
+FROM Payments
+INNER JOIN FamilyMembers
+    ON Payments.family_member = FamilyMembers.member_id
+INNER JOIN Goods
+    ON Payments.good = Goods.good_id
+WHERE FamilyMembers.status = 'son';
+```
+
+#### Задача 4. INNER JOIN с группировкой
+**Условиe** Выведите идентификатор (поле `room_id`) и среднюю оценку комнаты (поле `rating`, для вывода используйте псевдоним `avg_score`), составленную на основании отзывов из таблицы `Reviews`.
+Данная таблица связана с `Reservations` (таблица, где вы можете взять идентификатор комнаты) по полям `reservation_id` и `Reservations.id`.
+
+```sql
+SELECT Reservations.room_id,
+       AVG(Reviews.rating) AS avg_score
+FROM Reviews
+INNER JOIN Reservations
+    ON Reviews.reservation_id = Reservations.id
+GROUP BY Reservations.room_id;
+```
