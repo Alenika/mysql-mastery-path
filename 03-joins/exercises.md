@@ -50,3 +50,25 @@ INNER JOIN Reservations
     ON Reviews.reservation_id = Reservations.id
 GROUP BY Reservations.room_id;
 ```
+
+### Упражнения: Внешнее соединение OUTER JOIN
+**Источник** [sql-academy.org](https://sql-academy.org/ru/guide/outer-join)
+
+#### Задача 1. Внешнее левое соединение
+**Условиe** Выведите имя `first_name` и фамилию `last_name` каждого учителя из таблицы `Teacher`, а также количество занятий, в которых он был назначен преподавателем. Если преподаватель не был назначен ни на одно занятие, то выведите 0.
+Для вывода количества занятий используйте псевдоним `amount_classes`.
+
+```sql
+SELECT
+    Teacher.first_name,
+    Teacher.last_name,
+    COUNT(Schedule.id) AS amount_classes
+FROM Teacher
+LEFT JOIN Schedule
+    ON Teacher.id = Schedule.teacher
+GROUP BY
+    Teacher.id,
+    Teacher.first_name,
+    Teacher.last_name;
+```
+
