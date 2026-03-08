@@ -93,3 +93,19 @@ FROM Timepair
 LIMIT 2 OFFSET 1;
 ```
 
+### Упражнения: Подзапрос с одной строкой с одним столбцом
+**Источник** [sql-academy.org](https://sql-academy.org/ru/guide/subquery-with-one-column-one-row#podzapros-s-odnoj-strokoj-s-odnim-stolbcom)
+
+#### Задача 1. Поиск владельца
+**Условиe** Выведите всю информацию о пользователе из таблицы `Users`, кто является владельцем самого дорогого жилья (таблица `Rooms`).
+
+```sql
+SELECT Users.*
+FROM Users
+JOIN Rooms
+    ON Rooms.owner_id = Users.id
+WHERE Rooms.price = (
+    SELECT MAX(price)
+    FROM Rooms
+);
+```
