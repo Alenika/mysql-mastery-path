@@ -91,3 +91,80 @@ SELECT
     (SELECT name FROM company LIMIT 1) AS company_name;
 ```
 
+## Урок 7. Подзапросы с несколькими строками и одним столбцом
+
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/subquery-with-one-column-several-row)
+
+Если подзапрос возвращает более одной строки, его нельзя использовать с простыми операторами сравнения (`=`, `<>` и т.д.).  
+Для таких подзапросов используются 3 специальных оператора:
+
+| Оператор | Возвращает TRUE если... |
+|----------|------------------------|
+| `ALL`    | условие верно **для всех** значений из набора |
+| `ANY`    | условие верно **хотя бы для одного** значения из набора |
+| `IN`     | значение **входит** в набор |
+
+---
+
+### Оператор ALL
+
+Сравнивает значение с **каждым** элементом набора. TRUE — только если все сравнения вернули TRUE.
+
+```sql
+-- Проверка: все ли комнаты дешевле 200?
+SELECT 200 > ALL(SELECT price FROM Rooms);
+```
+
+```sql
+-- Найти владельцев жилья, которые НИКОГДА сами не снимали жильё
+SELECT DISTINCT name
+FROM Users
+INNER JOIN Rooms ON Users.id = Rooms.owner_id
+WHERE Users.id <> ALL (
+    SELECT DISTINCT user_id FROM Reservations
+);
+```
+
+> 💡 `<> ALL` — это аналог `NOT IN`, но безопаснее при наличии `NULL` в подзапросе.
+
+---
+
+### Оператор IN
+
+Проверяет, входит ли значение в список результатов подзапроса.
+
+```sql
+-- Найти всех владельцев жилья стоимостью >= 150
+SELECT * FROM Users
+WHERE id IN (
+    SELECT DISTINCT owner_id FROM Rooms WHERE price >= 150
+);
+```
+
+---
+
+### Оператор ANY
+
+Возвращает TRUE, если хотя бы одно сравнение из набора истинно. `= ANY` эквивалентен `IN`.
+
+```sql
+-- Найти пользователей, у которых есть хотя бы 1 жильё стоимостью > 150
+SELECT * FROM Users
+WHERE id = ANY (
+    SELECT DISTINCT owner_id FROM Rooms WHERE price >= 150
+);
+```
+
+---
+
+### 💡 Сравнение операторов
+
+```sql
+-- Эти два запроса эквивалентны:
+WHERE id IN (SELECT owner_id FROM Rooms WHERE price >= 150)
+WHERE id = ANY (SELECT owner_id FROM Rooms WHERE price >= 150)
+
+-- А эти два — тоже эквивалентны:
+WHERE id NOT IN (SELECT user_id FROM Reservations)
+WHERE id <> ALL (SELECT user_id FROM Reservations)
+```
