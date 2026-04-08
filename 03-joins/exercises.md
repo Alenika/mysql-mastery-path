@@ -134,3 +134,19 @@ WHERE (has_tv, has_internet, has_kitchen, has_air_con) IN (
     WHERE id = 11
 );
 ```
+
+### Упражнения: Коррелированные подзапросы
+#### Задача 1. Получение самого дорогого купленного товара
+**Условие** С помощью коррелированного подзапроса выведите имена всех членов семьи (`member_name`) и цену их самого дорогого купленного товара.
+Для вывода цены самого дорогого купленного товара используйте псевдоним `good_price`. Если такого товара нет, выведите `NULL`.
+
+```sql
+SELECT 
+    FamilyMembers.member_name,
+    (
+        SELECT MAX(Payments.unit_price)
+        FROM Payments
+        WHERE Payments.family_member = FamilyMembers.member_id
+    ) AS good_price
+FROM FamilyMembers;
+```
