@@ -120,3 +120,17 @@ WHERE good_id NOT IN (
     SELECT DISTINCT good FROM Payments
 );
 ```
+
+### Упражнения: Многостолбцовые подзапросы
+#### Задача 1. Строковые подзапросы (удобства комнат)
+**Условие** Выведите список комнат (все поля, таблица `Rooms`), которые по своим удобствам (`has_tv`, `has_internet`, `has_kitchen`, `has_air_con`) совпадают с комнатой с идентификатором "11".
+
+```sql
+SELECT *
+FROM Rooms
+WHERE (has_tv, has_internet, has_kitchen, has_air_con) IN (
+    SELECT has_tv, has_internet, has_kitchen, has_air_con
+    FROM Rooms
+    WHERE id = 11
+);
+```
