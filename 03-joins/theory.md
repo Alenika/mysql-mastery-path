@@ -222,3 +222,39 @@ WHERE Reservations.price = Rooms.price;
 - Количество столбцов **должно совпадать**
 - `NOT IN` осторожно — ломается на NULL
 - Лучше `LEFT JOIN ... IS NULL` для "не существует"
+
+## Урок 9. Коррелированные подзапросы
+
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/correlated-subqueries)
+
+### 🔗 Что такое коррелированный подзапрос?
+
+**Коррелированный** = **"связанный"** — подзапрос **ссылается на столбцы внешнего (основного) запроса**.
+
+**Некоррелированный** (до этого):
+```sql
+-- Выполняется ОДИН раз
+WHERE id IN (SELECT id FROM другая_таблица);
+```
+
+**Коррелированный** (новое):
+```sql
+-- Выполняется для КАЖДОЙ строки внешнего запроса!
+SELECT name, (
+    SELECT SUM(...) 
+    FROM payments 
+    WHERE payments.member_id = FamilyMembers.member_id  -- ← ссылка на внешний!
+) AS total
+FROM FamilyMembers;
+```
+
+### 💰 Пример: сколько потратил каждый член семьи
+
+```sql
+SELECT FamilyMembers.member_name, (
+    SELECT SUM(Payments.unit_price * Payments.amount)
+    FROM Payments
+    WHERE Payments.family_member = FamilyMembers.member_id  -- Корреляция!
+) AS total_spent
+FROM FamilyMembers;
+```
