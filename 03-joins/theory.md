@@ -168,3 +168,57 @@ WHERE id = ANY (SELECT owner_id FROM Rooms WHERE price >= 150)
 WHERE id NOT IN (SELECT user_id FROM Reservations)
 WHERE id <> ALL (SELECT user_id FROM Reservations)
 ```
+
+## Урок 8. Подзапросы с несколькими столбцами (многостолбцовые)
+
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/subquery-with-several-column)
+
+Подзапрос может возвращать **несколько столбцов и строк** (производную таблицу). Тогда сравниваем **пары/множества значений**.
+
+### Синтаксис сравнения по нескольким столбцам
+
+```sql
+SELECT ...
+FROM таблица
+WHERE (столбец1, столбец2) IN (
+    SELECT столбецA, столбецB FROM подзапрос
+);
+```
+
+**IN** сравнивает **попарно** — ищет точное совпадение кортежей.
+
+### 🔍 Пример: бронирования с неизменной ценой
+
+**Задача:** найти бронирования, где цена на момент брони (`Reservations.price`) = текущей цене комнаты (`Rooms.price`).
+
+```sql
+SELECT * FROM Reservations
+WHERE (room_id, price) IN (
+    SELECT id, price FROM Rooms
+);
+```
+
+**Логика:**
+1. Подзапрос → таблица `(id, price)` всех комнат
+2. Основной запрос фильтрует бронирования, где пара `(room_id, price)` есть в этой таблице
+
+**Альтернатива через JOIN** (более читаемо):
+```sql
+SELECT Reservations.*
+FROM Reservations
+INNER JOIN Rooms ON Reservations.room_id = Rooms.id
+WHERE Reservations.price = Rooms.price;
+```
+
+### 💡 Ключевые отличия
+
+| Подзапросы | 1 столбец | 2+ столбца |
+|------------|-----------|------------|
+| **Оператор** | `IN`, `ANY`, `ALL` | `IN` (кортежи) |
+| **Пример** | `id IN (SELECT id...)` | `(id, price) IN (SELECT id, price...)` |
+| **Когда использовать** | Список ID | Пары/множества значений |
+
+### ⚠️ Ограничения
+- Количество столбцов **должно совпадать**
+- `NOT IN` осторожно — ломается на NULL
+- Лучше `LEFT JOIN ... IS NULL` для "не существует"
