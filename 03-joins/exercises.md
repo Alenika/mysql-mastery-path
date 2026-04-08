@@ -109,3 +109,14 @@ WHERE Rooms.price = (
     FROM Rooms
 );
 ```
+
+#### Задача 2. Столбцовые подзапросы с выражением `IN`
+**Условие** Выведите названия товаров из таблицы Goods (поле `good_name`), которые ещё ни разу не покупались ни одним из членов семьи (таблица `Payments`).
+
+```sql
+SELECT good_name
+FROM Goods
+WHERE good_id NOT IN (
+    SELECT DISTINCT good FROM Payments
+);
+```
