@@ -258,3 +258,29 @@ SELECT FamilyMembers.member_name, (
 ) AS total_spent
 FROM FamilyMembers;
 ```
+
+## Урок 10. Объединение запросов (UNION)
+
+**Источник:** [sql-academy.org](https://sql-academy.org/ru/guide/combining-queries)
+
+Объединяет **результаты 2+ SELECT** в **одну таблицу**. 
+
+### 🎯 Синтаксис
+
+```sql
+SELECT поля FROM таблицы1 WHERE ...
+UNION [ALL]
+SELECT поля FROM таблицы2 WHERE ...;
+```
+
+**UNION** vs **JOIN**:
+| UNION | JOIN |
+|-------|------|
+| Объединяет **результаты запросов** | Объединяет **строки таблиц** |
+| Независимые SELECT | Связанные таблицы |
+| Вертикальное объединение | Горизонтальное |
+
+### ⚙️ Модификаторы
+
+- **`UNION`** — **убирает дубликаты** (DISTINCT по умолчанию)
+- **`UNION ALL`** — **оставляет все** (быстрее)
