@@ -150,3 +150,17 @@ SELECT
     ) AS good_price
 FROM FamilyMembers;
 ```
+
+### Упражнения: Объединение запросов (UNION)
+**Источник** [sql-academy.org](https://sql-academy.org/ru/guide/combining-queries)
+
+#### Задача 1. Объединение учеников и учителей
+**Условие** Выведите полные имена (first_name, middle_name, last_name) всех студентов и преподавателей.
+
+```sql
+SELECT first_name, middle_name, last_name
+FROM Student
+UNION
+SELECT first_name, middle_name, last_name
+FROM Teacher;
+```
