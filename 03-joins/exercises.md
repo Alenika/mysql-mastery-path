@@ -181,3 +181,23 @@ SELECT id,
     END AS rating
 FROM Reviews;
 ```
+
+### Упражнения: Условная функция IF
+**Источник** [sql-academy.org](https://sql-academy.org/ru/guide/if-function#uslovnaya-funkciya-if)
+
+#### Задача 1. Условный вывод строки
+**Условие** Из таблицы `Rooms` выведите идентификаторы сдаваемых жилых помещений (поле `id`) и наличие телевизора в помещении: если телевизор присутствует — выведите «YES», иначе «NO».
+Для вывода наличия телевизора используйте псевдоним `has_tv`.
+
+```sql
+SELECT id, IF(has_tv = 1, 'YES', 'NO') AS has_tv
+FROM Rooms;
+```
+
+#### Задача 2. Замена null на строку
+**Условие** Из таблицы `Teacher` выведите имена (поле `first_name`), отчества (поле `middle_name`) и фамилии (поле `last_name`) учителей. Если отчество у учителя отсутствует, выведите в поле `middle_name` значение «Empty».
+
+```sql
+SELECT first_name, IFNULL(middle_name, 'Empty') AS middle_name, last_name
+FROM Teacher;
+```
